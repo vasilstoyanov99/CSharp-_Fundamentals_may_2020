@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+
+namespace _07.Order_by_Age
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = Console.ReadLine();
+            List<PersonData> allPersonsData = new List<PersonData>();
+
+            while (input != "End")
+            {
+                string[] data = input.Split();
+                PersonData newPersonInfo = new PersonData(data[0], data[1], int.Parse(data[2]));
+                allPersonsData.Add(newPersonInfo);
+                input = Console.ReadLine();
+            }
+
+            foreach (var person in allPersonsData.OrderBy(x => x.Age))
+            {
+                Console.WriteLine($"{person.Name} with ID: {person.ID} is {person.Age} years old.");
+            }
+        }
+    }
+
+    class PersonData
+    {
+        public string Name { get; set; }
+        public string ID { get; set; }
+        public int Age { get; set; }
+
+        public PersonData(string name, string id, int age)
+        {
+            this.Name = name;
+            this.ID = id;
+            this.Age = age;
+        }
+    }
+}
